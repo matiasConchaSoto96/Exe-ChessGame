@@ -1,10 +1,10 @@
 import { EPieceType } from "../enums/PieceType.enum";
 
 export interface IChessPiece {
-  canMove         : boolean;
-  color           : string;
-  currentPosition : string;
-  type            : EPieceType;
-  getColor        : () => string;
-  getType         : () => EPieceType;
+  readonly canMove         : boolean;
+  readonly color           : string;
+  readonly currentPosition : number;
+  readonly type            : EPieceType;
+  getColor                 : () => string;
+  getType                  : () => EPieceType;
 }

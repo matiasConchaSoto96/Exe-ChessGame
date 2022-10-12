@@ -1,9 +1,9 @@
-import { IChessPiece } from "../typescript/interfaces/ChessPiece.interface";
-import { Tile } from "./Tile.class";
+import { IChessPiece } from '../typescript/interfaces/ChessPiece.interface';
+import { Tile } from './Tile.class';
 
 export class ChessBoard {
   private blackBackYard : IChessPiece[];
-  public pieces        : Tile[][];
+  public  pieces        : Tile[][];
   private whiteBackYard : IChessPiece[];
 
   constructor(
