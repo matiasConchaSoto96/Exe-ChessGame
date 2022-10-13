@@ -6,15 +6,70 @@ export class Pawn implements IChessPiece {
   public color           : string;
   public currentPosition : number; 
   public type            : EPieceType;
+  private wasMoved       : boolean;
 
   constructor(
     color           : string,
     currentPosition : number,
   ) {
-    this.canMove         = false;
+    this.canMove         = true;
     this.color           = color;
     this.currentPosition = currentPosition;
     this.type            = EPieceType.PAWN;
+    this.wasMoved        = false;
+  }
+
+  verifyOneCell( position : number, isEmpty : boolean ) : boolean {
+
+    let canMove = false;
+
+    // if(isEmpty) this.canMove = true
+    if(isEmpty && this.color === 'black' && this.currentPosition + 8 === position) {
+      // this.canMove = false;
+      canMove = true;
+    }
+    
+    if(isEmpty && this.color === 'white' && this.currentPosition - 8 === position) {
+      // this.canMove = false;
+      canMove = true;
+    }
+
+    return canMove;
+  }
+
+  verifyTwoCells( position : number, isEmpty : boolean ) : boolean {
+
+    if(!this.wasMoved) return false;
+
+    let canMove = false;
+
+    if(isEmpty && this.color === 'black' && this.currentPosition + 16 === position) {
+      canMove = true;
+      this.wasMoved = true;
+    }
+
+    if(isEmpty && this.color === 'white' && this.currentPosition - 16 === position) {
+      canMove = true;
+      this.wasMoved = true;
+    }
+
+    return canMove;
+
+  }
+
+  verifyDiagonalEating( pieceColor : string, isEmpty : boolean ) : boolean {
+
+    let canEat = false;
+
+    if(!isEmpty && this.color === 'black' && pieceColor === 'white') {
+      canEat = true;
+    }
+
+    if(!isEmpty && this.color === 'white' && pieceColor === 'black') {
+      canEat = true;
+    }
+
+    return canEat;
   }
 
   getColor() : string {
@@ -23,24 +78,5 @@ export class Pawn implements IChessPiece {
 
   getType () : EPieceType {
     return this.type;
-  }
-
-  verifyOneCell( isEmpty : boolean ) : boolean {
-
-    // let isTileEmpty = isEmpty();
-
-    if(isEmpty && this.color === 'black') this.canMove = true
-    
-    if(!isEmpty && this.color === 'black') this.canMove = false
-    
-    if(isEmpty && this.color === 'white') this.canMove = true
-
-    if(!isEmpty && this.color === 'white') this.canMove = false
-
-    return this.canMove;
-  }
-
-  verifyTwoCells() : boolean {
-    return true;
   }
 }
