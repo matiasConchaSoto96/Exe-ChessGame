@@ -61,13 +61,7 @@ export class Pawn implements IChessPiece {
 
     let canEat = false;
 
-    if(!isEmpty && this.color === 'black' && pieceColor === 'white') {
-      canEat = true;
-    }
-
-    if(!isEmpty && this.color === 'white' && pieceColor === 'black') {
-      canEat = true;
-    }
+    if(!isEmpty && this.color !== pieceColor) canEat = true;
 
     return canEat;
   }
